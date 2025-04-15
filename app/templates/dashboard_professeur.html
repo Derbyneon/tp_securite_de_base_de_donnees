@@ -1,27 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Bienvenue, Professeur {{ current_user.username }} !</h1>
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; color: #2c3e50;">
+            👩‍🏫 Bienvenue, Professeur <span style="color: #3498db;">{{ current_user.username }}</span> !
+        </h1>
+    </div>
 
-    <h2>Mes Cours</h2>
-    <ul>
-        {% for course in courses %}
-            <li>{{ course.title }} - {{ course.course_type }}</li>
-        {% endfor %}
-    </ul>
+    <div style="max-width: 800px; margin: 0 auto; padding: 2rem; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 2rem; color: #2980b9; margin-bottom: 1rem;">Mes Cours</h2>
+        <ul style="list-style-type: none; padding-left: 0;">
+            {% for course in courses %}
+                <li style="background-color: #ecf0f1; margin: 10px 0; padding: 1rem; border-radius: 6px; font-size: 1.1rem;">
+                    <strong>{{ course.title }}</strong> - {{ course.course_type }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <h2>Gestion des Notes</h2>
-    <ul>
-        {% for grade in grades %}
-            <li>
-                {{ grade.course.title }} - {{ grade.grade }} - {{ grade.exam_type }}
-                <a href="{{ url_for('update_grade', grade_id=grade.id) }}">Modifier</a>
-                <form method="POST" action="{{ url_for('delete_grade', grade_id=grade.id) }}" style="display:inline;">
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                </form>
-            </li>
-        {% else %}
-            <li>Aucune note à afficher.</li>
-        {% endfor %}
-    </ul>
+    <div style="max-width: 800px; margin: 2rem auto; padding: 2rem; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 2rem; color: #e74c3c; margin-bottom: 1rem;">Gestion des Notes</h2>
+        <ul style="list-style-type: none; padding-left: 0;">
+            {% for grade in grades %}
+                <li style="background-color: #f9f9f9; margin: 10px 0; padding: 1rem; border-radius: 6px; font-size: 1.1rem;">
+                    {{ grade.course.title }} - {{ grade.grade }} - {{ grade.exam_type }}
+                    <a href="{{ url_for('update_grade', grade_id=grade.id) }}" style="color: #3498db; margin-left: 1rem; text-decoration: none; font-weight: bold;">Modifier</a>
+                    <form method="POST" action="{{ url_for('delete_grade', grade_id=grade.id) }}" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" style="
+                            background-color: #e74c3c;
+                            border: none;
+                            padding: 6px 12px;
+                            border-radius: 4px;
+                            font-weight: bold;
+                            color: white;
+                            cursor: pointer;
+                            transition: background-color 0.3s;
+                        ">Supprimer</button>
+                    </form>
+                </li>
+            {% else %}
+                <li style="background-color: #f9f9f9; margin: 10px 0; padding: 1rem; border-radius: 6px; font-size: 1.1rem;">
+                    Aucune note à afficher.
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

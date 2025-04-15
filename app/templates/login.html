@@ -1,29 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Se connecter</h2>
+    <h2 style="text-align: center; margin-bottom: 1.5rem;">Connexion à votre espace</h2>
     
-    <!-- Affichage des messages flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <ul>
+            <ul style="list-style: none; padding: 0; max-width: 500px; margin: 0 auto 1.5rem;">
                 {% for category, message in messages %}
-                    <li class="alert alert-{{ category }}">{{ message }}</li>
+                    <li style="
+                        background-color: {% if category == 'success' %}#d4edda{% elif category == 'error' %}#f8d7da{% else %}#fff3cd{% endif %};
+                        color: {% if category == 'success' %}#155724{% elif category == 'error' %}#721c24{% else %}#856404{% endif %};
+                        padding: 12px;
+                        border-radius: 5px;
+                        margin-bottom: 10px;
+                        border: 1px solid #ccc;
+                    ">
+                        {{ message }}
+                    </li>
                 {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
 
-    <form method="POST" action="{{ url_for('login') }}">
+    <form method="POST" action="{{ url_for('login') }}" style="max-width: 500px; margin: auto; background-color: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.username.label }}: {{ form.username() }}
+
+        <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">{{ form.username.label }}</label>
+            {{ form.username(class_="form-control", style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;") }}
         </div>
-        <div>
-            {{ form.password.label }}: {{ form.password() }}
+
+        <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 5px; font-weight: bold;">{{ form.password.label }}</label>
+            {{ form.password(class_="form-control", style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;") }}
         </div>
-        <div>
-            {{ form.submit() }}
+
+        <div style="text-align: center;">
+            {{ form.submit(class_="btn", style="
+                background-color: #1abc9c;
+                color: white;
+                padding: 10px 25px;
+                border: none;
+                border-radius: 5px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            ") }}
         </div>
     </form>
 {% endblock %}

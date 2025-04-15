@@ -1,34 +1,73 @@
-<!-- update_course.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Modifier le cours : {{ course.title }}</h1>
+    <h1 style="text-align: center; margin-bottom: 2rem;">
+        ✏️ Modifier le cours : <span style="color: #3498db;">{{ course.title }}</span>
+    </h1>
 
-    <form method="POST">
-        <div class="form-group">
-            <label for="title">Titre</label>
-            <input type="text" name="title" id="title" value="{{ course.title }}" class="form-control" required>
+    <form method="POST" style="
+        max-width: 600px;
+        margin: auto;
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    ">
+        <div style="margin-bottom: 1.5rem;">
+            <label for="title" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Titre du cours</label>
+            <input type="text" name="title" id="title" value="{{ course.title }}" required style="
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            ">
         </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea name="description" id="description" class="form-control" required>{{ course.description }}</textarea>
+        <div style="margin-bottom: 1.5rem;">
+            <label for="description" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Description</label>
+            <textarea name="description" id="description" rows="4" required style="
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            ">{{ course.description }}</textarea>
         </div>
 
-        <div class="form-group">
-            <label for="hours">Nombre d'heures</label>
-            <input type="number" name="hours" id="hours" value="{{ course.hours }}" class="form-control" required>
+        <div style="margin-bottom: 1.5rem;">
+            <label for="hours" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Nombre d'heures</label>
+            <input type="number" name="hours" id="hours" value="{{ course.hours }}" required style="
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            ">
         </div>
 
-        <div class="form-group">
-            <label for="course_type">Type de cours</label>
-            <select name="course_type" id="course_type" class="form-control" required>
-                <option value="CM" {% if course.course_type == 'CM' %}selected{% endif %}>CM</option>
-                <option value="TD" {% if course.course_type == 'TD' %}selected{% endif %}>TD</option>
-                <option value="TP" {% if course.course_type == 'TP' %}selected{% endif %}>TP</option>
+        <div style="margin-bottom: 2rem;">
+            <label for="course_type" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">Type de cours</label>
+            <select name="course_type" id="course_type" required style="
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            ">
+                <option value="CM" {% if course.course_type == 'CM' %}selected{% endif %}>Cours Magistral (CM)</option>
+                <option value="TD" {% if course.course_type == 'TD' %}selected{% endif %}>Travaux Dirigés (TD)</option>
+                <option value="TP" {% if course.course_type == 'TP' %}selected{% endif %}>Travaux Pratiques (TP)</option>
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <div style="text-align: center;">
+            <button type="submit" style="
+                background-color: #3498db;
+                color: white;
+                padding: 12px 30px;
+                border: none;
+                border-radius: 5px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            ">✅ Mettre à jour</button>
+        </div>
     </form>
 {% endblock %}

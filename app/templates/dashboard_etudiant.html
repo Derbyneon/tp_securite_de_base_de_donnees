@@ -1,21 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Bienvenue, Étudiant {{ current_user.username }} !</h1>
+    <h1 style="text-align: center; margin-bottom: 2rem;">
+        Bienvenue, <span style="color: #3498db;">{{ current_user.username }}</span> !
+    </h1>
 
-    <h2>Mes Cours</h2>
-    <ul>
-        {% for course in courses %}
-            <li>{{ course.title }} - {{ course.course_type }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Mes Notes</h2>
-    <ul>
-        {% for grade in notes %}
-            <li>{{ grade.course.title }} - {{ grade.grade }} - {{ grade.exam_type }}</li>
+    <section style="margin-bottom: 2.5rem;">
+        <h2 style="border-bottom: 2px solid #3498db; padding-bottom: 0.5rem; margin-bottom: 1rem;">📚 Mes Cours</h2>
+        {% if courses %}
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                {% for course in courses %}
+                    <div style="
+                        background-color: #ecf0f1;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        flex: 1 1 250px;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                    ">
+                        <h3 style="margin-bottom: 0.5rem;">{{ course.title }}</h3>
+                        <p style="color: #555;">Type : {{ course.course_type }}</p>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
-            <li>Aucune note disponible.</li>
-        {% endfor %}
-    </ul>
+            <p>Vous n'êtes inscrit à aucun cours pour le moment.</p>
+        {% endif %}
+    </section>
+
+    <section>
+        <h2 style="border-bottom: 2px solid #1abc9c; padding-bottom: 0.5rem; margin-bottom: 1rem;">📝 Mes Notes</h2>
+        {% if notes %}
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                {% for grade in notes %}
+                    <div style="
+                        background-color: #fdfdfd;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        flex: 1 1 250px;
+                        border-left: 5px solid #1abc9c;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+                    ">
+                        <h4 style="margin-bottom: 0.3rem;">{{ grade.course.title }}</h4>
+                        <p style="margin: 0.2rem 0;"><strong>Note :</strong> {{ grade.grade }}</p>
+                        <p style="margin: 0.2rem 0;"><strong>Type :</strong> {{ grade.exam_type }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aucune note disponible pour le moment.</p>
+        {% endif %}
+    </section>
 {% endblock %}

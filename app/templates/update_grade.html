@@ -1,15 +1,41 @@
-<!-- update_grade.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Modifier la Note de {{ grade.course.title }}</h1>
+    <h1 style="text-align: center; margin-bottom: 2rem;">
+        📝 Modifier la note du cours : <span style="color: #e67e22;">{{ grade.course.title }}</span>
+    </h1>
 
-    <form method="POST">
-        <div>
-            <label for="grade">Nouvelle note:</label>
-            <input type="number" name="grade" value="{{ grade.grade }}" required>
+    <form method="POST" style="
+        max-width: 400px;
+        margin: auto;
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    ">
+        <div style="margin-bottom: 1.5rem;">
+            <label for="grade" style="display: block; font-weight: bold; margin-bottom: 0.5rem;">
+                Nouvelle note (type : {{ grade.exam_type }})
+            </label>
+            <input type="number" name="grade" id="grade" step="0.1" value="{{ grade.grade }}" required style="
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            ">
         </div>
-        <button type="submit" class="btn btn-primary">Mettre à jour</button>
-    </form>
 
+        <div style="text-align: center;">
+            <button type="submit" style="
+                background-color: #e67e22;
+                color: white;
+                padding: 10px 25px;
+                border: none;
+                border-radius: 5px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            ">✅ Mettre à jour</button>
+        </div>
+    </form>
 {% endblock %}
